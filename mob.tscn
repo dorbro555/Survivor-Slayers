@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c72tsrrb1xnla"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_g17o1"]
+[ext_resource type="PackedScene" uid="uid://fjtujxgybojb" path="res://mobs/glTF-blob-monsters/GreenDemon.gltf" id="2_kj324"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ruyi"]
+size = Vector3(1.01375, 0.949646, 1.07967)
+
+[node name="Mob" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_g17o1")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="Character" parent="Pivot" instance=ExtResource("2_kj324")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.878206, 0)
+shape = SubResource("BoxShape3D_7ruyi")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5382, 0)
+aabb = AABB(-0.874106, -1.68067, -0.783394, 1.74821, 1.85768, 1.56679)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
